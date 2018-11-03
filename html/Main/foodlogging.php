@@ -3,7 +3,7 @@
     </head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
         <title><?php echo $title; ?></title>
-        <link rel="stylesheet" type="text/css" href="Styles/Stylesheet.css" /> 
+        <link rel="stylesheet" type="text/css" href="Styles/StyleSheetFoodLogging.css" /> 
     </head>
     </body>
         <div id ="wrapper">
@@ -14,30 +14,22 @@
                 <nav id = "navigation">
                     <ul id="nav">
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="index.php">Diet</a></li>
+                        <li><a href="foodlogging.php">Food Logging</a></li>
                         <li><a href="index.php">Activity</a></li>  
-                        <li><a href="index.php">Meal Plan</a></li>  
-                        <li><a href="index.php">About</a></li> 
-                        
-
-
-
+                        <li><a href="index.php">Summary</a></li> 
                     </ul>
                 </nav>
-                
-                <div id="content_area">
+            <div id="content_area">
                     <?php echo $content; ?>
-                    <img src="alexafoodpic.png" alt="Trulli" width="500" height="333">
-
+                <p>Food Logging Page</p>
                 </div>
             
-            <div id ="sidebar">
-                 <center> <h4>Sign in</h4> </center>
-            </div>
             
             <footer>
                 <p>All rights reserved</p>
-            <footer>
+            
                 </div>
+                
+                
     </body>
 </html>
