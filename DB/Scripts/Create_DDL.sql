@@ -31,11 +31,12 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`FoodNutrition_Identifier`
+-- Table `mydb`.`FoodNutrition`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`FoodNutrition_Identifier` ;
+DROP TABLE IF EXISTS `mydb`.`FoodNutrition` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`FoodNutrition_Identifier` (
+CREATE TABLE IF NOT EXISTS `mydb`.`FoodNutrition` (
+  `IDFoodNutrition` VARCHAR(45) NOT NULL,
   `foodName` VARCHAR(128) NOT NULL,
   `upc_code` VARCHAR(45) NULL,
   `serving_size_value` VARCHAR(45) NULL,
@@ -63,7 +64,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`FoodNutrition_Identifier` (
   `calcium_dv` VARCHAR(45) NULL,
   `iron_dv` VARCHAR(45) NULL,
   UNIQUE INDEX `foodName_UNIQUE` (`foodName` ASC) VISIBLE,
-  PRIMARY KEY (`foodName`))
+  PRIMARY KEY (`IDFoodNutrition`),
+  UNIQUE INDEX `IDFoodNutrition_Identifier_UNIQUE` (`IDFoodNutrition` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -75,20 +77,20 @@ DROP TABLE IF EXISTS `mydb`.`FoodLog` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`FoodLog` (
   `idFoodLog` INT NOT NULL,
   `User_idUser` INT NOT NULL,
-  `FoodNutrition_Identifier_foodName` VARCHAR(128) NOT NULL,
+  `FoodNutrition_IDFoodNutrition` VARCHAR(45) NOT NULL,
   `TimeStamp` DATETIME NULL,
   `quanity` INT NULL,
-  PRIMARY KEY (`idFoodLog`, `User_idUser`, `FoodNutrition_Identifier_foodName`),
+  PRIMARY KEY (`idFoodLog`, `User_idUser`, `FoodNutrition_IDFoodNutrition`),
   INDEX `fk_FoodLog_User_idx` (`User_idUser` ASC) VISIBLE,
-  INDEX `fk_FoodLog_FoodNutrition_Identifier1_idx` (`FoodNutrition_Identifier_foodName` ASC) VISIBLE,
+  INDEX `fk_FoodLog_FoodNutrition1_idx` (`FoodNutrition_IDFoodNutrition` ASC) VISIBLE,
   CONSTRAINT `fk_FoodLog_User`
     FOREIGN KEY (`User_idUser`)
     REFERENCES `mydb`.`Users` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_FoodLog_FoodNutrition_Identifier1`
-    FOREIGN KEY (`FoodNutrition_Identifier_foodName`)
-    REFERENCES `mydb`.`FoodNutrition_Identifier` (`foodName`)
+  CONSTRAINT `fk_FoodLog_FoodNutrition1`
+    FOREIGN KEY (`FoodNutrition_IDFoodNutrition`)
+    REFERENCES `mydb`.`FoodNutrition` (`IDFoodNutrition`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -211,21 +213,21 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`BaseIngredent` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`BaseIngredent` (
-  `FoodNutrition_Identifier_foodName` VARCHAR(128) NOT NULL,
+  `FoodNutrition_IDFoodNutrition` VARCHAR(45) NOT NULL,
+  `BaseMeal_idBaseMeal` INT NOT NULL,
   `ingredent_type` VARCHAR(45) NULL,
   `food_group` VARCHAR(45) NULL,
-  `BaseMeal_idBaseMeal` INT NOT NULL,
-  PRIMARY KEY (`FoodNutrition_Identifier_foodName`, `BaseMeal_idBaseMeal`),
-  INDEX `fk_BaseIngredent_FoodNutrition_Identifier1_idx` (`FoodNutrition_Identifier_foodName` ASC) VISIBLE,
+  PRIMARY KEY (`FoodNutrition_IDFoodNutrition`, `BaseMeal_idBaseMeal`),
   INDEX `fk_BaseIngredent_BaseMeal1_idx` (`BaseMeal_idBaseMeal` ASC) VISIBLE,
-  CONSTRAINT `fk_BaseIngredent_FoodNutrition_Identifier1`
-    FOREIGN KEY (`FoodNutrition_Identifier_foodName`)
-    REFERENCES `mydb`.`FoodNutrition_Identifier` (`foodName`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_BaseIngredent_FoodNutrition1_idx` (`FoodNutrition_IDFoodNutrition` ASC) VISIBLE,
   CONSTRAINT `fk_BaseIngredent_BaseMeal1`
     FOREIGN KEY (`BaseMeal_idBaseMeal`)
     REFERENCES `mydb`.`BaseMeal` (`idBaseMeal`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_BaseIngredent_FoodNutrition1`
+    FOREIGN KEY (`FoodNutrition_IDFoodNutrition`)
+    REFERENCES `mydb`.`FoodNutrition` (`IDFoodNutrition`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -330,13 +332,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`MealSummary` (
   `total_vitamin_c` VARCHAR(45) NULL,
   `total_calcium` VARCHAR(45) NULL,
   `total_iron` VARCHAR(45) NULL,
-  `MealContent_BaseMeal_idBaseMeal` INT NOT NULL,
-  `MealContent_DailyMeals_idDailyMeals` INT NOT NULL,
-  PRIMARY KEY (`MealSummaryID`, `MealContent_BaseMeal_idBaseMeal`, `MealContent_DailyMeals_idDailyMeals`),
-  INDEX `fk_MealSummary_MealContent1_idx` (`MealContent_BaseMeal_idBaseMeal` ASC, `MealContent_DailyMeals_idDailyMeals` ASC) VISIBLE,
-  CONSTRAINT `fk_MealSummary_MealContent1`
-    FOREIGN KEY (`MealContent_BaseMeal_idBaseMeal` , `MealContent_DailyMeals_idDailyMeals`)
-    REFERENCES `mydb`.`MealContent` (`BaseMeal_idBaseMeal` , `DailyMeals_idDailyMeals`)
+  `BaseMeal_idBaseMeal` INT NOT NULL,
+  PRIMARY KEY (`MealSummaryID`, `BaseMeal_idBaseMeal`),
+  INDEX `fk_MealSummary_BaseMeal1_idx` (`BaseMeal_idBaseMeal` ASC) VISIBLE,
+  CONSTRAINT `fk_MealSummary_BaseMeal1`
+    FOREIGN KEY (`BaseMeal_idBaseMeal`)
+    REFERENCES `mydb`.`BaseMeal` (`idBaseMeal`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -478,11 +479,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`user_credentals` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`user_credentals` (
+  `Users_idUser` INT NOT NULL,
   `username` VARCHAR(16) NOT NULL,
   `email` VARCHAR(255) NULL,
   `password` VARCHAR(32) NOT NULL,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `Users_idUser` INT NOT NULL,
+  `Alexa_ID` VARCHAR(45) NULL,
   PRIMARY KEY (`Users_idUser`),
   CONSTRAINT `fk_user_Users1`
     FOREIGN KEY (`Users_idUser`)
