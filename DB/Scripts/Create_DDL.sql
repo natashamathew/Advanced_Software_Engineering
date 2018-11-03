@@ -23,10 +23,11 @@ USE `mydb` ;
 DROP TABLE IF EXISTS `mydb`.`Users` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
-  `idUser` INT NOT NULL,
+  `idUser` INT NOT NULL AUTO_INCREMENT,
   `age` INT NULL,
   `currentWeight` VARCHAR(45) NULL,
-  PRIMARY KEY (`idUser`))
+  PRIMARY KEY (`idUser`),
+  UNIQUE INDEX `idUser_UNIQUE` (`idUser` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -75,7 +76,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`FoodLog` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`FoodLog` (
-  `idFoodLog` INT NOT NULL,
+  `idFoodLog` INT NOT NULL AUTO_INCREMENT,
   `User_idUser` INT NOT NULL,
   `FoodNutrition_IDFoodNutrition` VARCHAR(45) NOT NULL,
   `TimeStamp` DATETIME NULL,
@@ -83,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`FoodLog` (
   PRIMARY KEY (`idFoodLog`, `User_idUser`, `FoodNutrition_IDFoodNutrition`),
   INDEX `fk_FoodLog_User_idx` (`User_idUser` ASC) VISIBLE,
   INDEX `fk_FoodLog_FoodNutrition1_idx` (`FoodNutrition_IDFoodNutrition` ASC) VISIBLE,
+  UNIQUE INDEX `idFoodLog_UNIQUE` (`idFoodLog` ASC) VISIBLE,
   CONSTRAINT `fk_FoodLog_User`
     FOREIGN KEY (`User_idUser`)
     REFERENCES `mydb`.`Users` (`idUser`)
@@ -102,7 +104,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`ExerciseLog` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`ExerciseLog` (
-  `idExerciseLog` INT NOT NULL,
+  `idExerciseLog` INT NOT NULL AUTO_INCREMENT,
   `User_idUser` INT NOT NULL,
   `DateTime` DATETIME NULL,
   `Duration` VARCHAR(45) NULL,
@@ -110,6 +112,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`ExerciseLog` (
   `CaloriesBurned` VARCHAR(45) NULL,
   PRIMARY KEY (`idExerciseLog`, `User_idUser`),
   INDEX `fk_ExerciseLog_User1_idx` (`User_idUser` ASC) VISIBLE,
+  UNIQUE INDEX `idExerciseLog_UNIQUE` (`idExerciseLog` ASC) VISIBLE,
   CONSTRAINT `fk_ExerciseLog_User1`
     FOREIGN KEY (`User_idUser`)
     REFERENCES `mydb`.`Users` (`idUser`)
