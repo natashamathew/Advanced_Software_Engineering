@@ -21,10 +21,13 @@
                 </nav>
             <div id="content_area">
                     <?php echo $content; ?>
-                <p>Food Logging Page</p>
-                </div>
-            
-            
+            <p> Food Item 
+                <input type="text"> </p>
+            <p> Quantity   
+                <input type="text"> </p>    
+            <p> <input type="submit" value="Enter"></p>
+            </div>
+               
             <footer>
                 <p>All rights reserved</p>
             
