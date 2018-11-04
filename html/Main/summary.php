@@ -3,7 +3,7 @@
     </head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
         <title><?php echo $title; ?></title>
-        <link rel="stylesheet" type="text/css" href="Styles/StyleSheet.css" /> 
+        <link rel="stylesheet" type="text/css" href="Styles/StyleSheetSummary.css" /> 
     </head>
     </body>
         <div id ="wrapper">
@@ -19,18 +19,17 @@
                         <li><a href="summary.php">Summary</a></li> 
                     </ul>
                 </nav>
-                
-                <div id="content_area">
+            <div id="content_area">
                     <?php echo $content; ?>
-                    <img src="Images/alexafoodpic.png" alt="Trulli" width="500" height="333">
-                </div>
-             <div id ="sidebar">
-                 <center> <h4>Sign in</h4> </center>
+                <p> Summary page </p>
             </div>
-            
+             
             <footer>
                 <p>All rights reserved</p>
-           
+            
                 </div>
+                
+                
     </body>
 </html>
+

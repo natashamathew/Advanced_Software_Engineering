@@ -10,6 +10,7 @@ and open the template in the editor.
     //header("Content-type: text/css; charset: UTF-8");
     //echo "<h1>Healthy Diet Smart System</h1>";
     
-    include 'Template.php';
+    include 'Template.php' ;
+    
 ?>
     

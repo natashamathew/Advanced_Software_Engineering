@@ -15,8 +15,8 @@
                     <ul id="nav">
                         <li><a href="index.php">Home</a></li>
                         <li><a href="foodlogging.php">Food Logging</a></li>
-                        <li><a href="index.php">Activity</a></li>  
-                        <li><a href="index.php">Summary</a></li> 
+                        <li><a href="activity.php">Activity</a></li>  
+                        <li><a href="summary.php">Summary</a></li> 
                     </ul>
                 </nav>
             <div id="content_area">
@@ -27,7 +27,7 @@
                 <input type="text"> </p>    
             <p> <input type="submit" value="Enter"></p>
             </div>
-               
+             
             <footer>
                 <p>All rights reserved</p>
             
