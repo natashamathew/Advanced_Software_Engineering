@@ -4,7 +4,7 @@
     
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
         <title><?php echo $title; ?></title>
-        <link rel="stylesheet" type="text/css" href="Styles/StyleSheetFoodLogging.css" /> 
+        <link rel="stylesheet" type="text/css" href="Styles/StyleSheetMealPlan.css" /> 
     </head>
     </body>
         <div id ="wrapper">
@@ -23,11 +23,7 @@
                 </nav>
             <div id="content_area">
                     <?php echo $content; ?>
-            <p> Food Item 
-                <input type="text"> </p>
-            <p> Quantity   
-                <input type="text"> </p>    
-            <p> <input type="submit" value="Enter"></p>
+            
             </div>
              
             <footer>

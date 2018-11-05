@@ -14,9 +14,10 @@
                 <nav id = "navigation">
                     <ul id="nav">
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="foodlogging.php">Food Logging</a></li>
-                        <li><a href="activity.php">Activity</a></li>  
-                        <li><a href="summary.php">Summary</a></li> 
+                        <li><a href="activity.php">Activity</a></li>   
+                        <li><a href="foodlogging.php">Food Dairy</a></li>
+                        <li><a href="mealplan.php">Meal Plan</a></li>
+                        <li><a href="summary.php">Summary</a></li>
                     </ul>
                 </nav>
             <div id="content_area">

@@ -5,20 +5,24 @@
         <title><?php echo $title; ?></title>
         <link rel="stylesheet" type="text/css" href="Styles/StyleSheet.css" /> 
     </head>
+   
     </body>
         <div id ="wrapper">
                 <div id ="banner">
                     <center> <h1>Healthy Diet Smart System</h1></center>
                 </div>
-            
+         
                 <nav id = "navigation">
                     <ul id="nav">
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="foodlogging.php">Food Logging</a></li>
-                        <li><a href="activity.php">Activity</a></li>  
-                        <li><a href="summary.php">Summary</a></li> 
+                        <li><a href="activity.php">Activity</a></li>   
+                        <li><a href="foodlogging.php">Food Dairy</a></li>
+                        <li><a href="mealplan.php">Meal Plan</a></li>
+                        <li><a href="summary.php">Summary</a></li>
                     </ul>
                 </nav>
+                
+                
                 
                 <div id="content_area">
                     <?php echo $content; ?>
