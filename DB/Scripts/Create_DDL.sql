@@ -293,7 +293,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`MealContent` (
   `BaseMeal_idBaseMeal` INT NOT NULL,
   `DailyMeals_idDailyMeals` INT NOT NULL,
   `meal_type` INT NULL,
-  PRIMARY KEY (`BaseMeal_idBaseMeal`, `DailyMeals_idDailyMeals`),
   INDEX `fk_MealContent_DailyMeals1_idx` (`DailyMeals_idDailyMeals` ASC) VISIBLE,
   CONSTRAINT `fk_MealContent_BaseMeal1`
     FOREIGN KEY (`BaseMeal_idBaseMeal`)
@@ -303,103 +302,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`MealContent` (
   CONSTRAINT `fk_MealContent_DailyMeals1`
     FOREIGN KEY (`DailyMeals_idDailyMeals`)
     REFERENCES `mydb`.`DailyMeals` (`idDailyMeals`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`MealSummary`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`MealSummary` ;
-
-CREATE TABLE IF NOT EXISTS `mydb`.`MealSummary` (
-  `MealSummaryID` INT NOT NULL,
-  `Total Calories` VARCHAR(45) NULL,
-  `total_fat` VARCHAR(45) NULL,
-  `total_trans_fat` VARCHAR(45) NULL,
-  `total_saturated_fat` VARCHAR(45) NULL,
-  `total_cholesterol` VARCHAR(45) NULL,
-  `total_sodium` VARCHAR(45) NULL,
-  `total_carbohydrates` VARCHAR(45) NULL,
-  `total_dietary_fiber` VARCHAR(45) NULL,
-  `total_sugars` VARCHAR(45) NULL,
-  `total_protein` VARCHAR(45) NULL,
-  `total_vitamin_a` VARCHAR(45) NULL,
-  `total_vitamin_c` VARCHAR(45) NULL,
-  `total_calcium` VARCHAR(45) NULL,
-  `total_iron` VARCHAR(45) NULL,
-  `BaseMeal_idBaseMeal` INT NOT NULL,
-  PRIMARY KEY (`MealSummaryID`, `BaseMeal_idBaseMeal`),
-  INDEX `fk_MealSummary_BaseMeal1_idx` (`BaseMeal_idBaseMeal` ASC) VISIBLE,
-  CONSTRAINT `fk_MealSummary_BaseMeal1`
-    FOREIGN KEY (`BaseMeal_idBaseMeal`)
-    REFERENCES `mydb`.`BaseMeal` (`idBaseMeal`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`DailySummary`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`DailySummary` ;
-
-CREATE TABLE IF NOT EXISTS `mydb`.`DailySummary` (
-  `DailySummaryID` INT NOT NULL,
-  `Total Calories` VARCHAR(45) NULL,
-  `total_fat` VARCHAR(45) NULL,
-  `total_trans_fat` VARCHAR(45) NULL,
-  `total_saturated_fat` VARCHAR(45) NULL,
-  `total_cholesterol` VARCHAR(45) NULL,
-  `total_sodium` VARCHAR(45) NULL,
-  `total_carbohydrates` VARCHAR(45) NULL,
-  `total_dietary_fiber` VARCHAR(45) NULL,
-  `total_sugars` VARCHAR(45) NULL,
-  `total_protein` VARCHAR(45) NULL,
-  `total_vitamin_a` VARCHAR(45) NULL,
-  `total_vitamin_c` VARCHAR(45) NULL,
-  `total_calcium` VARCHAR(45) NULL,
-  `total_iron` VARCHAR(45) NULL,
-  `DailyMeals_idDailyMeals` INT NOT NULL,
-  `DailyMeals_WeeklyMeals_idWeeklyMeals` INT NOT NULL,
-  PRIMARY KEY (`DailySummaryID`, `DailyMeals_idDailyMeals`, `DailyMeals_WeeklyMeals_idWeeklyMeals`),
-  INDEX `fk_DailySummary_DailyMeals1_idx` (`DailyMeals_idDailyMeals` ASC, `DailyMeals_WeeklyMeals_idWeeklyMeals` ASC) VISIBLE,
-  CONSTRAINT `fk_DailySummary_DailyMeals1`
-    FOREIGN KEY (`DailyMeals_idDailyMeals` , `DailyMeals_WeeklyMeals_idWeeklyMeals`)
-    REFERENCES `mydb`.`DailyMeals` (`idDailyMeals` , `WeeklyMeals_idWeeklyMeals`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`WeeklySummary`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`WeeklySummary` ;
-
-CREATE TABLE IF NOT EXISTS `mydb`.`WeeklySummary` (
-  `WeeklySummaryID` INT NOT NULL,
-  `Total Calories` VARCHAR(45) NULL,
-  `total_fat` VARCHAR(45) NULL,
-  `total_trans_fat` VARCHAR(45) NULL,
-  `total_saturated_fat` VARCHAR(45) NULL,
-  `total_cholesterol` VARCHAR(45) NULL,
-  `total_sodium` VARCHAR(45) NULL,
-  `total_carbohydrates` VARCHAR(45) NULL,
-  `total_dietary_fiber` VARCHAR(45) NULL,
-  `total_sugars` VARCHAR(45) NULL,
-  `total_protein` VARCHAR(45) NULL,
-  `total_vitamin_a` VARCHAR(45) NULL,
-  `total_vitamin_c` VARCHAR(45) NULL,
-  `total_calcium` VARCHAR(45) NULL,
-  `total_iron` VARCHAR(45) NULL,
-  `WeeklyMeals_idWeeklyMeals` INT NOT NULL,
-  PRIMARY KEY (`WeeklySummaryID`, `WeeklyMeals_idWeeklyMeals`),
-  INDEX `fk_WeeklySummary_WeeklyMeals1_idx` (`WeeklyMeals_idWeeklyMeals` ASC) VISIBLE,
-  CONSTRAINT `fk_WeeklySummary_WeeklyMeals1`
-    FOREIGN KEY (`WeeklyMeals_idWeeklyMeals`)
-    REFERENCES `mydb`.`WeeklyMeals` (`idWeeklyMeals`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -512,6 +414,26 @@ CREATE TABLE IF NOT EXISTS `mydb`.`yearly_view` (`User_idUser` INT, `year(Time_S
 CREATE TABLE IF NOT EXISTS `mydb`.`weekly_view` (`User_idUser` INT, `weekofyear(Time_Stamp)` INT, `year(Time_Stamp)` INT, `sum(total_calories*quanity)` INT);
 
 -- -----------------------------------------------------
+-- Placeholder table for view `mydb`.`BaseIngredentFull_view`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`BaseIngredentFull_view` (`FoodNutrition_IDFoodNutrition` INT, `BaseMeal_idBaseMeal` INT, `ingredent_type` INT, `food_group` INT, `IDFoodNutrition` INT, `foodName` INT, `upc_code` INT, `total_calories` INT, `serving_size_value` INT, `serving_size_mass` INT, `serving_size_units` INT, `calories_from_fats` INT, `total_fat_grams` INT, `total_fat_dv` INT, `trans_fat_grams` INT, `trans_fat_dv` INT, `saturated_fat_grams` INT, `saturated_fat_dv` INT, `cholesterol_grams` INT, `cholesterol_dv` INT, `sodium_grams` INT, `sodium_dv` INT, `total_carbohydrates_grams` INT, `total_carbohydrates_dv` INT, `dietary_fiber_grams` INT, `dietary_fiber_dv` INT, `sugars_grams` INT, `protein_grams` INT, `vitamin_a_dv` INT, `vitamin_c_dv` INT, `calcium_dv` INT, `iron_dv` INT);
+
+-- -----------------------------------------------------
+-- Placeholder table for view `mydb`.`MealSummary_view`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`MealSummary_view` (`BaseMeal_idBaseMeal` INT, `sum(total_calories)` INT, `sum(total_fat_grams)` INT, `sum(trans_fat_grams)` INT, `sum(saturated_fat_grams)` INT, `sum(cholesterol_grams)` INT, `sum(sodium_grams)` INT, `sum(total_carbohydrates_grams)` INT, `sum(dietary_fiber_grams)` INT, `sum(sugars_grams)` INT, `sum(protein_grams)` INT, `sum(vitamin_a_dv)` INT, `sum(vitamin_c_dv)` INT, `sum(calcium_dv)` INT, `sum(iron_dv)` INT);
+
+-- -----------------------------------------------------
+-- Placeholder table for view `mydb`.`DailySummary_view`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`DailySummary_view` (`DailyMeals_idDailyMeals` INT, `WeeklyMeals_idWeeklyMeals` INT, `total_calories` INT, `total_fat_grams` INT, `trans_fat_grams` INT, `saturated_fat_grams` INT, `cholesterol_grams` INT, `sodium_grams` INT, `total_carbohydrates_grams` INT, `dietary_fiber_grams` INT, `sugars_grams` INT, `protein_grams` INT, `vitamin_a_dv` INT, `vitamin_c_dv` INT, `calcium_dv` INT, `iron_dv` INT);
+
+-- -----------------------------------------------------
+-- Placeholder table for view `mydb`.`WeeklySummary_view`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`WeeklySummary_view` (`idWeeklyMeals` INT, `MealSchedule_idMealSchedule` INT, `total_calories` INT, `total_fat_grams` INT, `trans_fat_grams` INT, `saturated_fat_grams` INT, `cholesterol_grams` INT, `sodium_grams` INT, `total_carbohydrates_grams` INT, `dietary_fiber_grams` INT, `sugars_grams` INT, `protein_grams` INT, `vitamin_a_dv` INT, `vitamin_c_dv` INT, `calcium_dv` INT, `iron_dv` INT);
+
+-- -----------------------------------------------------
 -- View `mydb`.`FoodLog_view`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `mydb`.`FoodLog_view`;
@@ -563,6 +485,95 @@ CREATE  OR REPLACE VIEW `weekly_view` AS
 	from
 		FoodLog_view
 	group by User_idUser, week(Time_Stamp);
+
+-- -----------------------------------------------------
+-- View `mydb`.`BaseIngredentFull_view`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`BaseIngredentFull_view`;
+DROP VIEW IF EXISTS `mydb`.`BaseIngredentFull_view` ;
+USE `mydb`;
+CREATE  OR REPLACE VIEW `BaseIngredentFull_view` AS
+	Select
+            *
+    FROM
+        BaseIngredent
+           LEFT JOIN
+        FoodNutrition ON BaseIngredent.FoodNutrition_IDFoodNutrition=FoodNutrition.IDFoodNutrition;
+
+-- -----------------------------------------------------
+-- View `mydb`.`MealSummary_view`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`MealSummary_view`;
+DROP VIEW IF EXISTS `mydb`.`MealSummary_view` ;
+USE `mydb`;
+CREATE  OR REPLACE VIEW `MealSummary_view` AS
+	Select
+		BaseMeal_idBaseMeal,  sum(total_calories), sum(total_fat_grams), sum(trans_fat_grams), sum(saturated_fat_grams),
+        sum(cholesterol_grams), sum(sodium_grams), sum(total_carbohydrates_grams), sum(dietary_fiber_grams), 
+        sum(sugars_grams), sum(protein_grams), sum(vitamin_a_dv), sum(vitamin_c_dv), sum(calcium_dv), sum(iron_dv)
+	from
+		BaseIngredentFull_view
+	group by BaseMeal_idBaseMeal;
+
+-- -----------------------------------------------------
+-- View `mydb`.`DailySummary_view`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`DailySummary_view`;
+DROP VIEW IF EXISTS `mydb`.`DailySummary_view` ;
+USE `mydb`;
+CREATE  OR REPLACE VIEW `DailySummary_view` AS
+	Select
+		MealContent.DailyMeals_idDailyMeals, DailyMeals.WeeklyMeals_idWeeklyMeals, 
+        sum(`MealSummary_view`.`sum(total_calories)`)  AS total_calories, 
+        sum(`MealSummary_view`.`sum(total_fat_grams)`) AS total_fat_grams,
+        sum(`MealSummary_view`.`sum(trans_fat_grams)`) AS trans_fat_grams, 
+        sum(`MealSummary_view`.`sum(saturated_fat_grams)`) AS saturated_fat_grams,
+        sum(`MealSummary_view`.`sum(cholesterol_grams)`) AS cholesterol_grams, 
+        sum(`MealSummary_view`.`sum(sodium_grams)`) AS sodium_grams, 
+        sum(`MealSummary_view`.`sum(total_carbohydrates_grams)`) AS total_carbohydrates_grams,
+        sum(`MealSummary_view`.`sum(dietary_fiber_grams)`) AS dietary_fiber_grams, 
+        sum(`MealSummary_view`.`sum(sugars_grams)`) AS sugars_grams, 
+        sum(`MealSummary_view`.`sum(protein_grams)`) AS protein_grams, 
+        sum(`MealSummary_view`.`sum(vitamin_a_dv)`) AS vitamin_a_dv, 
+        sum(`MealSummary_view`.`sum(vitamin_c_dv)`) AS vitamin_c_dv, 
+        sum(`MealSummary_view`.`sum(calcium_dv)`) AS calcium_dv, 
+        sum(`MealSummary_view`.`sum(iron_dv)`) AS iron_dv
+	from
+		MealContent
+        left join
+        MealSummary_view on MealContent.BaseMeal_idBaseMeal=MealSummary_view.BaseMeal_idBaseMeal
+        left join
+        DailyMeals on DailyMeals.idDailyMeals=MealContent.DailyMeals_idDailyMeals
+	group by DailyMeals_idDailyMeals, DailyMeals.WeeklyMeals_idWeeklyMeals;
+
+-- -----------------------------------------------------
+-- View `mydb`.`WeeklySummary_view`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`WeeklySummary_view`;
+DROP VIEW IF EXISTS `mydb`.`WeeklySummary_view` ;
+USE `mydb`;
+CREATE  OR REPLACE VIEW `WeeklySummary_view` AS
+	Select
+		WeeklyMeals.idWeeklyMeals, WeeklyMeals.MealSchedule_idMealSchedule,
+        sum(`DailySummary_view`.`total_calories`)  AS total_calories, 
+        sum(`DailySummary_view`.`total_fat_grams`) AS total_fat_grams,
+        sum(`DailySummary_view`.`trans_fat_grams`) AS trans_fat_grams, 
+        sum(`DailySummary_view`.`saturated_fat_grams`) AS saturated_fat_grams,
+        sum(`DailySummary_view`.`cholesterol_grams`) AS cholesterol_grams, 
+        sum(`DailySummary_view`.`sodium_grams`) AS sodium_grams, 
+        sum(`DailySummary_view`.`total_carbohydrates_grams`) AS total_carbohydrates_grams,
+        sum(`DailySummary_view`.`dietary_fiber_grams`) AS dietary_fiber_grams, 
+        sum(`DailySummary_view`.`sugars_grams`) AS sugars_grams, 
+        sum(`DailySummary_view`.`protein_grams`) AS protein_grams, 
+        sum(`DailySummary_view`.`vitamin_a_dv`) AS vitamin_a_dv, 
+        sum(`DailySummary_view`.`vitamin_c_dv`) AS vitamin_c_dv, 
+        sum(`DailySummary_view`.`calcium_dv`) AS calcium_dv, 
+        sum(`DailySummary_view`.`iron_dv`) AS iron_dv
+	from
+        DailySummary_view
+        left join 
+        WeeklyMeals on WeeklyMeals.idWeeklyMeals=DailySummary_view.WeeklyMeals_idWeeklyMeals
+	group by WeeklyMeals_idWeeklyMeals, WeeklyMeals.MealSchedule_idMealSchedule;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
