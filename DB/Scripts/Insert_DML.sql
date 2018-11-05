@@ -6,14 +6,14 @@ insert into `mydb`.Users (`idUser`) VALUES ('101');
 insert into `mydb`.Users (`idUser`) VALUES ('202');
 
 
-INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `date_eaten`) VALUES ('101', '1', '2', '2018-11-03');
-INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `date_eaten`) VALUES ('101', '2', '3', '2018-11-03');
-INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `date_eaten`) VALUES ('101', '3', '1', '2018-11-03');
+INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `Time_Stamp`) VALUES ('101', '1', '2', '2018-11-03');
+INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `Time_Stamp`) VALUES ('101', '2', '3', '2018-11-03');
+INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `Time_Stamp`) VALUES ('101', '3', '1', '2018-11-03');
 
-INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `date_eaten`) VALUES ('202', '1', '5', '2018-11-03');
-INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `date_eaten`) VALUES ('202', '2', '5', '2018-11-03');
-INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `date_eaten`) VALUES ('202', '3', '10', '2018-11-03');
+INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `Time_Stamp`) VALUES ('202', '1', '5', '2018-11-03');
+INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `Time_Stamp`) VALUES ('202', '2', '5', '2018-11-03');
+INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `Time_Stamp`) VALUES ('202', '3', '10', '2018-11-03');
 
-INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `date_eaten`) VALUES ('101', '1', '1', '2018-11-02');
-INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `date_eaten`) VALUES ('101', '2', '1', '2018-11-02');
-INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `date_eaten`) VALUES ('101', '3', '1', '2018-11-02');
+INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `Time_Stamp`) VALUES ('101', '1', '1', '2018-11-02');
+INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `Time_Stamp`) VALUES ('101', '2', '1', '2018-11-02');
+INSERT INTO `mydb`.`FoodLog` (`User_idUser`, `FoodNutrition_IDFoodNutrition`, `quanity`, `Time_Stamp`) VALUES ('101', '3', '1', '2018-11-02');

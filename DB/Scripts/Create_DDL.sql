@@ -77,13 +77,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`FoodLog` (
   `idFoodLog` INT NOT NULL AUTO_INCREMENT,
   `User_idUser` INT NOT NULL,
   `FoodNutrition_IDFoodNutrition` VARCHAR(45) NOT NULL,
-  `date_eaten` DATE NULL,
-  `TimeStamp` DATETIME NULL,
+  `Time_Stamp` DATETIME NULL,
   `quanity` INT NULL,
   PRIMARY KEY (`idFoodLog`, `User_idUser`, `FoodNutrition_IDFoodNutrition`),
   INDEX `fk_FoodLog_User_idx` (`User_idUser` ASC) VISIBLE,
   INDEX `fk_FoodLog_FoodNutrition1_idx` (`FoodNutrition_IDFoodNutrition` ASC) VISIBLE,
-  UNIQUE INDEX `idFoodLog_UNIQUE` (`idFoodLog` ASC) VISIBLE,
   CONSTRAINT `fk_FoodLog_User`
     FOREIGN KEY (`User_idUser`)
     REFERENCES `mydb`.`Users` (`idUser`)
@@ -111,7 +109,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`ExerciseLog` (
   `CaloriesBurned` VARCHAR(45) NULL,
   PRIMARY KEY (`idExerciseLog`, `User_idUser`),
   INDEX `fk_ExerciseLog_User1_idx` (`User_idUser` ASC) VISIBLE,
-  UNIQUE INDEX `idExerciseLog_UNIQUE` (`idExerciseLog` ASC) VISIBLE,
   CONSTRAINT `fk_ExerciseLog_User1`
     FOREIGN KEY (`User_idUser`)
     REFERENCES `mydb`.`Users` (`idUser`)
@@ -182,10 +179,8 @@ DROP TABLE IF EXISTS `mydb`.`DailyNumbers` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`DailyNumbers` (
   `Date` DATETIME NOT NULL,
   `Users_idUser` INT NOT NULL,
-  `Calories_consumed` VARCHAR(45) NULL,
   `Calories_burned` VARCHAR(45) NULL,
   PRIMARY KEY (`Date`, `Users_idUser`),
-  UNIQUE INDEX `Date_UNIQUE` (`Date` ASC) VISIBLE,
   CONSTRAINT `fk_DailyNumbers_Users1`
     FOREIGN KEY (`Users_idUser`)
     REFERENCES `mydb`.`Users` (`idUser`)
@@ -497,32 +492,32 @@ CREATE TABLE IF NOT EXISTS `mydb`.`user_credentals` (
 USE `mydb` ;
 
 -- -----------------------------------------------------
--- Placeholder table for view `mydb`.`FoodFullLog_view`
+-- Placeholder table for view `mydb`.`FoodLog_view`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`FoodFullLog_view` (`idFoodLog` INT, `User_idUser` INT, `FoodNutrition_IDFoodNutrition` INT, `date_eaten` INT, `TimeStamp` INT, `quanity` INT, `IDFoodNutrition` INT, `foodName` INT, `upc_code` INT, `total_calories` INT, `serving_size_value` INT, `serving_size_mass` INT, `serving_size_units` INT, `calories_from_fats` INT, `total_fat_grams` INT, `total_fat_dv` INT, `trans_fat_grams` INT, `trans_fat_dv` INT, `saturated_fat_grams` INT, `saturated_fat_dv` INT, `cholesterol_grams` INT, `cholesterol_dv` INT, `sodium_grams` INT, `sodium_dv` INT, `total_carbohydrates_grams` INT, `total_carbohydrates_dv` INT, `dietary_fiber_grams` INT, `dietary_fiber_dv` INT, `sugars_grams` INT, `protein_grams` INT, `vitamin_a_dv` INT, `vitamin_c_dv` INT, `calcium_dv` INT, `iron_dv` INT);
+CREATE TABLE IF NOT EXISTS `mydb`.`FoodLog_view` (`idFoodLog` INT, `User_idUser` INT, `FoodNutrition_IDFoodNutrition` INT, `Time_Stamp` INT, `quanity` INT, `IDFoodNutrition` INT, `foodName` INT, `upc_code` INT, `total_calories` INT, `serving_size_value` INT, `serving_size_mass` INT, `serving_size_units` INT, `calories_from_fats` INT, `total_fat_grams` INT, `total_fat_dv` INT, `trans_fat_grams` INT, `trans_fat_dv` INT, `saturated_fat_grams` INT, `saturated_fat_dv` INT, `cholesterol_grams` INT, `cholesterol_dv` INT, `sodium_grams` INT, `sodium_dv` INT, `total_carbohydrates_grams` INT, `total_carbohydrates_dv` INT, `dietary_fiber_grams` INT, `dietary_fiber_dv` INT, `sugars_grams` INT, `protein_grams` INT, `vitamin_a_dv` INT, `vitamin_c_dv` INT, `calcium_dv` INT, `iron_dv` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `mydb`.`daily_view`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`daily_view` (`User_idUser` INT, `date_eaten` INT, `sum(total_calories*quanity)` INT);
+CREATE TABLE IF NOT EXISTS `mydb`.`daily_view` (`User_idUser` INT, `Time_Stamp` INT, `sum(total_calories*quanity)` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `mydb`.`yearly_view`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`yearly_view` (`User_idUser` INT, `year(date_eaten)` INT, `sum(total_calories*quanity)` INT);
+CREATE TABLE IF NOT EXISTS `mydb`.`yearly_view` (`User_idUser` INT, `year(Time_Stamp)` INT, `sum(total_calories*quanity)` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `mydb`.`weekly_view`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`weekly_view` (`User_idUser` INT, `weekofyear(date_eaten)` INT, `year(date_eaten)` INT, `sum(total_calories*quanity)` INT);
+CREATE TABLE IF NOT EXISTS `mydb`.`weekly_view` (`User_idUser` INT, `weekofyear(Time_Stamp)` INT, `year(Time_Stamp)` INT, `sum(total_calories*quanity)` INT);
 
 -- -----------------------------------------------------
--- View `mydb`.`FoodFullLog_view`
+-- View `mydb`.`FoodLog_view`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`FoodFullLog_view`;
-DROP VIEW IF EXISTS `mydb`.`FoodFullLog_view` ;
+DROP TABLE IF EXISTS `mydb`.`FoodLog_view`;
+DROP VIEW IF EXISTS `mydb`.`FoodLog_view` ;
 USE `mydb`;
-CREATE  OR REPLACE VIEW `FoodFullLog_view` AS
+CREATE  OR REPLACE VIEW `FoodLog_view` AS
     SELECT 
         *
     FROM
@@ -538,10 +533,10 @@ DROP VIEW IF EXISTS `mydb`.`daily_view` ;
 USE `mydb`;
 CREATE  OR REPLACE VIEW `daily_view` AS
 	Select
-		User_idUser, date_eaten, sum(total_calories*quanity)
+		User_idUser, Time_Stamp, sum(total_calories*quanity)
 	from
-		FoodFullLog_view
-	group by User_idUser, date_eaten;
+		FoodLog_view
+	group by User_idUser, Time_Stamp;
 
 -- -----------------------------------------------------
 -- View `mydb`.`yearly_view`
@@ -551,10 +546,10 @@ DROP VIEW IF EXISTS `mydb`.`yearly_view` ;
 USE `mydb`;
 CREATE  OR REPLACE VIEW `yearly_view` AS
 	Select
-		User_idUser, year(date_eaten), sum(total_calories*quanity)
+		User_idUser, year(Time_Stamp), sum(total_calories*quanity)
 	from
-		FoodFullLog_view
-	group by User_idUser, year(date_eaten);
+		FoodLog_view
+	group by User_idUser, year(Time_Stamp);
 
 -- -----------------------------------------------------
 -- View `mydb`.`weekly_view`
@@ -564,10 +559,10 @@ DROP VIEW IF EXISTS `mydb`.`weekly_view` ;
 USE `mydb`;
 CREATE  OR REPLACE VIEW `weekly_view` AS
 	Select
-		User_idUser, weekofyear(date_eaten), year(date_eaten), sum(total_calories*quanity)
+		User_idUser, weekofyear(Time_Stamp), year(Time_Stamp), sum(total_calories*quanity)
 	from
-		FoodFullLog_view
-	group by User_idUser, week(date_eaten);
+		FoodLog_view
+	group by User_idUser, week(Time_Stamp);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
