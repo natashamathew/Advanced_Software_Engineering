@@ -401,7 +401,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`FoodLog_view` (`idFoodLog` INT, `User_idUser`
 -- -----------------------------------------------------
 -- Placeholder table for view `mydb`.`daily_view`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`daily_view` (`User_idUser` INT, `Time_Stamp` INT, `sum(total_calories*quanity)` INT);
+CREATE TABLE IF NOT EXISTS `mydb`.`daily_view` (`User_idUser` INT, `date(Time_Stamp)` INT, `total_calories` INT, `total_fat_grams` INT, `trans_fat_grams` INT, `saturated_fat_grams` INT, `cholesterol_grams` INT, `sodium_grams` INT, `total_carbohydrates_grams` INT, `dietary_fiber_grams` INT, `sugars_grams` INT, `protein_grams` INT, `vitamin_a_dv` INT, `vitamin_c_dv` INT, `calcium_dv` INT, `iron_dv` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `mydb`.`yearly_view`
@@ -455,10 +455,24 @@ DROP VIEW IF EXISTS `mydb`.`daily_view` ;
 USE `mydb`;
 CREATE  OR REPLACE VIEW `daily_view` AS
 	Select
-		User_idUser, Time_Stamp, sum(total_calories*quanity)
+		User_idUser, date(Time_Stamp), 
+        sum(total_calories*quanity) AS total_calories,
+        sum(total_fat_grams*quanity) AS total_fat_grams,
+        sum(trans_fat_grams*quanity) AS trans_fat_grams,
+        sum(saturated_fat_grams*quanity) AS saturated_fat_grams,
+        sum(cholesterol_grams*quanity) AS cholesterol_grams, 
+        sum(sodium_grams*quanity) AS sodium_grams,
+        sum(total_carbohydrates_grams*quanity) AS total_carbohydrates_grams, 
+        sum(dietary_fiber_grams*quanity) AS dietary_fiber_grams,
+        sum(sugars_grams*quanity) AS sugars_grams,
+        sum(protein_grams*quanity) AS protein_grams, 
+        sum(vitamin_a_dv*quanity) AS vitamin_a_dv,
+        sum(vitamin_c_dv*quanity) AS vitamin_c_dv, 
+        sum(calcium_dv*quanity) AS calcium_dv,
+        sum(iron_dv*quanity) AS iron_dv
 	from
 		FoodLog_view
-	group by User_idUser, Time_Stamp;
+	group by User_idUser, day(Time_Stamp);
 
 -- -----------------------------------------------------
 -- View `mydb`.`yearly_view`
