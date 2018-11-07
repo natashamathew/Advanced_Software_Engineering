@@ -23,8 +23,23 @@
                 </nav>
             <div id="content_area">
                     <?php echo $content; ?>
-            <p> Food Item 
-                <input type="text"> </p>
+            
+			<form action='' method='post'>
+                <p><label>Food Item:</label><input type='text' name='foodName' value='' class='auto'></p>
+            </form>
+
+            <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+            <script type="text/javascript" src="https://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
+            <script type="text/javascript">
+            $(function() {
+                //autocomplete
+                $(".auto").autocomplete({
+                    source: "food_auto_complete.php",
+                    minLength: 1
+                });
+            });
+            </script>
+				
             <p> Quantity   
                 <input type="text"> </p>    
             <p> <input type="submit" value="Enter"></p>
