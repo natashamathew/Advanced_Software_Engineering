@@ -28,9 +28,7 @@
                     <?php echo $content; ?>
                     <img src="Images/alexafoodpic.png" alt="Trulli" width="500" height="333">
                 </div>
-             <div id ="sidebar">
-                 <center> <h4>Sign in</h4> </center>
-            </div>
+             
             
             <footer>
                 <p>All rights reserved</p>
