@@ -1,5 +1,5 @@
 <?php
-include '../../dbinfo.inc' ;
+include '../../../inc/dbinfo.inc' ;
 
 
 if (isset($_GET['term'])){
