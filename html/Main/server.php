@@ -47,9 +47,13 @@ if (isset($_POST['reg_user'])) {
         $id = uniqid();
   	$password = md5($password_1);//encrypt the password before saving in the database
 
-  	$query = "INSERT INTO users (id, username, email, password) 
-  			  VALUES('$id', $username', '$email', '$password')";
-  	mysqli_query($db, $query);
+  	$query = "INSERT INTO user_credentals (id, username, email, password) VALUES('$id', '$username', '$email', '$password')";
+  	$rv = mysqli_query($db, $query);
+	if ( $rv === false ){
+        echo $query;
+        echo 'User not registred. Please contact sysadmin';
+        die();
+        }
   	$_SESSION['username'] = $username;
   	$_SESSION['success'] = "You are now logged in";
         $_SESSION['id'] = $id ;
