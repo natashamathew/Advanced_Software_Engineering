@@ -34,7 +34,7 @@
             $(function() {
                 //autocomplete
                 $(".auto").autocomplete({
-                    source: "food_auto_complete.php",
+                    source: "search/food_auto_complete.php",
                     minLength: 1
                 });
             });
