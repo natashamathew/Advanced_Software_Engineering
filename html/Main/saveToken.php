@@ -4,7 +4,7 @@
 <body>
 <div>
 <?php
-$userId = $_SESSION['username'];
+$userId = $_SESSION['id'];
 $servername = "advsoft.codryjh8aaby.us-west-2.rds.amazonaws.com";
 $username = "devsoft";
 $password = "Test2018";
@@ -25,13 +25,17 @@ if ($conn->connect_error) {
 echo "Connected successfully<br>";
 
 
-$sql = "update Users set token='" + $token + "' where name=" + $userId + ";update Users set idFitBItUser='" + $userIdFitBit + "' where name=" + $userId + ";";
+$sql = "update Users set token='$token' where name='$userId'; update Users set idFitBItUser='$userIdFitBit' where name='$userId';";
 $result = $conn->query($sql);
 
 
 if ($conn->query($sql) === TRUE) {
     echo "Record updated successfully";
 } else {
+	echo 'sql: '.$sql."<br>";
+    echo 'User id fitbit: '.$userIdFitBit."<br>";
+    echo 'token: '.$token."<br>";
+    echo 'user app id: '.$userId ."<br>";
     echo "Error updating record: " . $conn->error;
 }
 #if ($result->num_rows > 0) {
