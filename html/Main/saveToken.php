@@ -4,7 +4,7 @@
 <body>
 <div>
 <?php
-$userId = '202'
+$userId = $_SESSION['username'];
 $servername = "advsoft.codryjh8aaby.us-west-2.rds.amazonaws.com";
 $username = "devsoft";
 $password = "Test2018";

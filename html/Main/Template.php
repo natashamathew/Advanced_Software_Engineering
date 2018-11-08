@@ -19,6 +19,7 @@
                         <li><a href="foodlogging.php">Food Dairy</a></li>
                         <li><a href="mealplan.php">Meal Plan</a></li>
                         <li><a href="summary.php">Summary</a></li>
+						<li><a href="https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=22D5DD&redirect_uri=https%3A%2F%2Fapi.heathsystemapp.tech%2FsaveToken.php&scope=activity%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight&expires_in=60480000">Register Fitbit</a></li>
                     </ul>
                 </nav>
                 
