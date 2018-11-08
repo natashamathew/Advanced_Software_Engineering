@@ -378,18 +378,13 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`user_credentals` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`user_credentals` (
-  `Users_idUser` INT NOT NULL,
+  `id` VARCHAR(45) NOT NULL,
   `username` VARCHAR(16) NOT NULL,
   `email` VARCHAR(255) NULL,
   `password` VARCHAR(32) NOT NULL,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `Alexa_ID` VARCHAR(45) NULL,
-  PRIMARY KEY (`Users_idUser`),
-  CONSTRAINT `fk_user_Users1`
-    FOREIGN KEY (`Users_idUser`)
-    REFERENCES `mydb`.`Users` (`idUser`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  PRIMARY KEY (`id`));
 
 USE `mydb` ;
 
@@ -401,7 +396,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`FoodLog_view` (`idFoodLog` INT, `User_idUser`
 -- -----------------------------------------------------
 -- Placeholder table for view `mydb`.`daily_view`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`daily_view` (`User_idUser` INT, `date(Time_Stamp)` INT, `total_calories` INT, `total_fat_grams` INT, `trans_fat_grams` INT, `saturated_fat_grams` INT, `cholesterol_grams` INT, `sodium_grams` INT, `total_carbohydrates_grams` INT, `dietary_fiber_grams` INT, `sugars_grams` INT, `protein_grams` INT, `vitamin_a_dv` INT, `vitamin_c_dv` INT, `calcium_dv` INT, `iron_dv` INT);
+CREATE TABLE IF NOT EXISTS `mydb`.`daily_view` (`User_idUser` INT, `'date'` INT, `total_calories` INT, `total_fat_grams` INT, `trans_fat_grams` INT, `saturated_fat_grams` INT, `cholesterol_grams` INT, `sodium_grams` INT, `total_carbohydrates_grams` INT, `dietary_fiber_grams` INT, `sugars_grams` INT, `protein_grams` INT, `vitamin_a_dv` INT, `vitamin_c_dv` INT, `calcium_dv` INT, `iron_dv` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `mydb`.`yearly_view`
@@ -455,7 +450,7 @@ DROP VIEW IF EXISTS `mydb`.`daily_view` ;
 USE `mydb`;
 CREATE  OR REPLACE VIEW `daily_view` AS
 	Select
-		User_idUser, date(Time_Stamp), 
+		User_idUser, date(Time_Stamp) as 'date', 
         sum(total_calories*quanity) AS total_calories,
         sum(total_fat_grams*quanity) AS total_fat_grams,
         sum(trans_fat_grams*quanity) AS trans_fat_grams,
@@ -472,7 +467,7 @@ CREATE  OR REPLACE VIEW `daily_view` AS
         sum(iron_dv*quanity) AS iron_dv
 	from
 		FoodLog_view
-	group by User_idUser, day(Time_Stamp);
+	group by User_idUser, date(Time_Stamp);
 
 -- -----------------------------------------------------
 -- View `mydb`.`yearly_view`
@@ -588,6 +583,20 @@ CREATE  OR REPLACE VIEW `WeeklySummary_view` AS
         left join 
         WeeklyMeals on WeeklyMeals.idWeeklyMeals=DailySummary_view.WeeklyMeals_idWeeklyMeals
 	group by WeeklyMeals_idWeeklyMeals, WeeklyMeals.MealSchedule_idMealSchedule;
+USE `mydb`;
+
+DELIMITER $$
+
+USE `mydb`$$
+DROP TRIGGER IF EXISTS `mydb`.`user_credentals_AFTER_INSERT` $$
+USE `mydb`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `mydb`.`user_credentals_AFTER_INSERT` AFTER INSERT ON `user_credentals` FOR EACH ROW
+BEGIN
+ Insert into Users (idUser) Value (new.id);
+END$$
+
+
+DELIMITER ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
