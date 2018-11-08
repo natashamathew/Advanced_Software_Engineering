@@ -7,7 +7,7 @@ $email    = "";
 $errors = array(); 
 
 // connect to the database
-$db = mysqli_connect('advsoft.codryjh8aaby.us-west-2.rds.amazonaws.com', 'devsoft', 'Test2018', 'myDB');
+$db = mysqli_connect('advsoft.codryjh8aaby.us-west-2.rds.amazonaws.com', 'devsoft', 'Test2018', 'mydb');
 
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
@@ -44,13 +44,15 @@ if (isset($_POST['reg_user'])) {
 
   // Finally, register user if there are no errors in the form
   if (count($errors) == 0) {
+        $id = uniqid();
   	$password = md5($password_1);//encrypt the password before saving in the database
 
-  	$query = "INSERT INTO users (username, email, password) 
-  			  VALUES('$username', '$email', '$password')";
+  	$query = "INSERT INTO users (id, username, email, password) 
+  			  VALUES('$id', $username', '$email', '$password')";
   	mysqli_query($db, $query);
   	$_SESSION['username'] = $username;
   	$_SESSION['success'] = "You are now logged in";
+        $_SESSION['id'] = $id ;
   	header('location: index.php');
   }
 }
@@ -75,6 +77,7 @@ if (isset($_POST['login_user'])) {
   	if (mysqli_num_rows($results) == 1) {
   	  $_SESSION['username'] = $username;
   	  $_SESSION['success'] = "You are now logged in";
+          $_SESSION['id'] = $id;
   	  header('location: index.php');
   	}else {
   		array_push($errors, "Wrong username/password combination");
