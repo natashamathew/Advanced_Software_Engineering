@@ -20,9 +20,11 @@ USE `mydb` ;
 DROP TABLE IF EXISTS `mydb`.`Users` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
-  `idUser` INT NOT NULL AUTO_INCREMENT,
+  `idUser` VARCHAR(32) NOT NULL,
   `age` INT NULL,
   `currentWeight` VARCHAR(45) NULL,
+  `token` VARCHAR(45) NULL,
+  `idFitBItUser` VARCHAR(45) NULL,
   PRIMARY KEY (`idUser`),
   UNIQUE INDEX `idUser_UNIQUE` (`idUser` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -75,7 +77,7 @@ DROP TABLE IF EXISTS `mydb`.`FoodLog` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`FoodLog` (
   `idFoodLog` INT NOT NULL AUTO_INCREMENT,
-  `User_idUser` INT NOT NULL,
+  `User_idUser` VARCHAR(32) NOT NULL,
   `FoodNutrition_IDFoodNutrition` VARCHAR(45) NOT NULL,
   `Time_Stamp` DATETIME NULL,
   `quanity` INT NULL,
@@ -102,7 +104,7 @@ DROP TABLE IF EXISTS `mydb`.`ExerciseLog` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`ExerciseLog` (
   `idExerciseLog` INT NOT NULL AUTO_INCREMENT,
-  `User_idUser` INT NOT NULL,
+  `User_idUser` VARCHAR(32) NOT NULL,
   `DateTime` DATETIME NULL,
   `Duration` VARCHAR(45) NULL,
   `Activity` VARCHAR(45) NULL,
@@ -123,7 +125,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`TargetGoals` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`TargetGoals` (
-  `User_idUser` INT NOT NULL,
+  `User_idUser` VARCHAR(32) NOT NULL,
   `Weight` VARCHAR(45) NULL,
   `Calorie` VARCHAR(45) NULL,
   `Fat` VARCHAR(45) NULL,
@@ -178,7 +180,7 @@ DROP TABLE IF EXISTS `mydb`.`DailyNumbers` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`DailyNumbers` (
   `Date` DATETIME NOT NULL,
-  `Users_idUser` INT NOT NULL,
+  `Users_idUser` VARCHAR(32) NOT NULL,
   `Calories_burned` VARCHAR(45) NULL,
   PRIMARY KEY (`Date`, `Users_idUser`),
   CONSTRAINT `fk_DailyNumbers_Users1`
@@ -237,7 +239,7 @@ DROP TABLE IF EXISTS `mydb`.`MealSchedule` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`MealSchedule` (
   `idMealSchedule` INT NOT NULL,
-  `Users_idUser` INT NOT NULL,
+  `Users_idUser` VARCHAR(32) NOT NULL,
   PRIMARY KEY (`idMealSchedule`, `Users_idUser`),
   INDEX `fk_MealSchedule_Users1_idx` (`Users_idUser` ASC) VISIBLE,
   CONSTRAINT `fk_MealSchedule_Users1`
