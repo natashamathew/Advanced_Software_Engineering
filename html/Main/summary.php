@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 </html>
     </head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
@@ -21,8 +22,12 @@
                     </ul>
                 </nav>
             <div id="content_area">
-                    <?php echo $content; ?>
-                <p> Summary page </p>
+                <?php $image='' ;
+                echo $image; ?>
+            <p> Date
+                <input type="text"> </p> 
+            <p> MM/DD/YY </p>
+            <p> <input type="submit" value="Enter"></p>
             </div>
              
             <footer>
@@ -33,4 +38,3 @@
                 
     </body>
 </html>
-
